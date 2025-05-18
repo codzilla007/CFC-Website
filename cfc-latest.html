@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceylon Food Corner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F0F3FF;
+            /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234E31AA' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1.5'/%3E%3Ccircle cx='13' cy='13' r='1.5'/%3E%3C/g%3E%3C/svg%3E"); */
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Custom Colors */
+        .bg-primary {
+            background-color: #211951;
+        }
+
+        .bg-secondary {
+            background-color: #836FFF;
+        }
+
+        .bg-accent {
+            background-color: #15F5BA;
+        }
+
+        .bg-light {
+            background-color: #F0F3FF;
+        }
+
+        .bg-dark {
+            background-color: #070511;
+        }
+
+
+
+
+        .text-primary {
+            color: #211951;
+        }
+
+        .text-secondary {
+            color: #836FFF;
+        }
+
+        .text-accent {
+            color: #15F5BA;
+        }
+
+        .text-offwhite {
+            color: #dae0f8;
+        }
+
+        .border-primary {
+            border-color: #211951;
+        }
+
+        .border-secondary {
+            border-color: #836FFF;
+        }
+
+        /* .hero-section {
+            background-color: #070511;
+        } */
+
+        .btn-primary {
+            background-color: #211951;
+            color: #F0F3FF;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #4736a3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid #211951;
+            color: #211951;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: #211951;
+            color: #F0F3FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
+        }
+
+        .food-card {
+            transition: all 0.5s ease;
+            background-color: #836FFF;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 15px rgba(74, 49, 170, 0.3);
+        }
+
+        .story-card {
+            transition: all 0.5s;
+        }
+
+        .story-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(74, 49, 170, 0.2);
+        }
+
+        .chicken-roll {
+            transition: all 0.5s ease;
+        }
+
+        .chicken-roll:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* Navigation Indicator */
+        .nav-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(78, 49, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background-color: #4E31AA;
+            transform: scale(1.4);
+        }
+
+        /* Animation classes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-fadeIn {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .animate-fadeInRight {
+            opacity: 0;
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        .animate-fadeInLeft {
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .animate-float {
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-700 {
+            animation-delay: 0.7s;
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        .scroll-down svg {
+            width: 30px;
+            height: 30px;
+            color: #4E31AA;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background-color: #F7F7F8;
+            z-index: 50;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .hero-image-mobile {
+            transform: translateX(0);
+        }
+
+
+
+        /* Page transition for smooth scroll */
+        .scroll-container {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* For smooth scrolling effect */
+        .smooth-scroll {
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        #video-background {
+            position: fixed;
+            right: 0;
+            bottom: -100px;
+            min-width: 80%;
+            min-height: 80%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            
+            object-fit:contain
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body class="font-poppins">
+    <!-- Navigation indicator -->
+    <div class="nav-indicator hidden md:flex">
+        <a href="#home" class="nav-dot active" data-section="home"></a>
+        <a href="#foods" class="nav-dot" data-section="foods"></a>
+        <a href="#story" class="nav-dot" data-section="story"></a>
+        <a href="#services" class="nav-dot" data-section="services"></a>
+        <a href="#contact" class="nav-dot" data-section="contact"></a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-light py-6 px-6 fixed top-0 w-full z-40 shadow-sm text-xl">
+        <div class="container mx-auto flex justify-between items-center ">
+            <div class="font-bold text-xl text-primary">Ceylon Food Corner</div>
+            <nav class="hidden md:flex space-x-6 text-sm">
+                <a href="#home" class="text-primary hover:text-secondary transition nav-link">Home</a>
+                <a href="#foods" class="text-primary hover:text-secondary transition nav-link">Foods</a>
+                <a href="#story" class="text-primary hover:text-secondary transition nav-link">Story</a>
+                <a href="#services" class="text-primary hover:text-secondary transition nav-link">Services</a>
+                <a href="#contact" class="text-primary hover:text-secondary transition nav-link">Contact</a>
+            </nav>
+            <div class="flex space-x-4 text-sm">
+                <button
+                    class="hidden md:block px-2 py-1 rounded-md border-2 border-primary text-primary font-semibold transition border-2">Sign
+                    In</button>
+                <button class="hidden md:block px-2 py-1 rounded-md bg-primary font-semibold text-white transition">Sign
+                    Up</button>
+                <button class="md:hidden text-primary menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="flex justify-between items-center mb-4">
+            <div class="font-bold text-lg text-primary">Ceylon Food Corner</div>
+            <button class="text-primary close-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-6 mb-8">
+            <a href="#home" class="text-primary hover:text-secondary transition text-lg mobile-link">Home</a>
+            <a href="#foods" class="text-primary hover:text-secondary transition text-lg mobile-link">Foods</a>
+            <a href="#story" class="text-primary hover:text-secondary transition text-lg mobile-link">Story</a>
+            <a href="#services" class="text-primary hover:text-secondary transition text-lg mobile-link">Services</a>
+            <a href="#contact" class="text-primary hover:text-secondary transition text-lg mobile-link">Contact</a>
+        </nav>
+        <div class="flex flex-col space-y-4 mt-auto">
+            <button
+                class="w-full py-3 rounded-md border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition">Sign
+                In</button>
+            <button class="w-full py-3 rounded-md bg-secondary text-white hover:bg-primary transition">Sign Up</button>
+        </div>
+    </div>
+    <div class="smooth-scroll-container">
+        <section>
+            <video autoplay muted loop id="video-background">
+                <source src="asset/fire.mp4" type="video/mp4">
+                <!-- Add additional source elements for different formats if needed -->
+            </video>
+            <div class="content">
+                <!-- Your website content goes here -->
+                <h1>Welcome to My Website</h1>
+                <p>This content appears over the video background.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Main content wrapper for smooth scrolling -->
+    <div class="smooth-scroll-container">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section  px-6 text-primary section ">
+
+
+
+
+
+            <div class="container mx-auto grid md:grid-cols-2 gap-6 items-center ">
+                <div class="animate-fadeInLeft text-offwhite">
+                    <h1 class="text-4xl md:text-6xl font-semibold mb-2 sm:mb-6">
+                        "A <span class="text-accent">Journey </span>to the<br>
+                        <span class="">Heart of Sri Lanka</span>"
+                    </h1>
+                    <p class="mb-2 sm:mb-6 text-sm md:text-lg font-medium">
+                        Welcome to Ceylon Food Corner, where every dish tells a story. Indulge in rich spices, authentic
+                        recipes, and the warm hospitality of our island home.
+                    </p>
+                    <p class="text-md md:text-2xl font-semibold text-secondary mb-4 sm:mb-8">
+                        Savor the taste of tradition in every bite!
+                    </p>
+                    <div class="flex space-x-4 text-md md:text-lg ">
+                        <button class="btn-primary px-5 py-1 rounded-md border-primary">Sign In</button>
+                        <button class="btn-outline px-4 py-1 rounded-md border-2 font-semibold">Sign Up</button>
+                    </div>
+                </div>
+                <div class="relative animate-float hidden hero-image-mobile ">
+                    <img src="/asset/cfcimage10.png" alt="Sri Lankan Food Corner Illustration"
+                        class=" rounded-lg animate-fadeInRight ">
+                </div>
+                <div class="relative animate-float ">
+                    <img src="/asset/cfcimage15.png" alt="Sri Lankan Food Corner Illustration"
+                        class=" rounded-lg animate-fadeInRight ">
+                </div>
+            </div>
+            <!-- <div class="scroll-down" data-scroll-to="foods">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div> -->
+        </section>
+
+        <!-- Favorite Items Section -->
+        <section id="foods" class="bg-dark px-6 section">
+            <div class="container mx-auto ">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="text-3xl font-bold text-primary">Our most favorite Items</div>
+                    <a href="#" class="btn-outline px-4 py-1 rounded-md border-2 font-semibold">View all</a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+                    <!-- Food Item 1 -->
+                    <div class="food-card rounded-xl p-4 text-white reveal-item md:col-span-7">
+                        <h3 class="text-xl font-semibold mb-1">String Hoppers</h3>
+                        <p class="text-sm mb-4">Sri Lankan authentic style Fried rice. Enjoy the taste!</p>
+                        <button class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition">Order
+                            Now</button>
+                    </div>
+
+                    <!-- Food Item 2 -->
+                    <div class="food-card rounded-xl p-4 text-white reveal-item md:col-span-5">
+                        <h3 class="text-xl font-semibold mb-1">Fried Rice</h3>
+                        <p class="text-sm mb-4">Sri Lankan authentic style Fried rice. Enjoy the taste!</p>
+                        <button class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition">Order
+                            Now</button>
+                    </div>
+
+                    <!-- Food Item 3 -->
+                    <div class="food-card rounded-xl p-4 text-white reveal-item md:col-span-5">
+                        <h3 class="text-xl font-semibold mb-1">Veg Rotti</h3>
+                        <p class="text-sm mb-4">Sri Lankan authentic style Fried rice. Enjoy the taste!</p>
+                        <button class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition">Order
+                            Now</button>
+                    </div>
+
+                    <!-- Food Item 4 -->
+                    <div class="food-card rounded-xl p-4 text-white reveal-item md:col-span-7">
+                        <h3 class="text-xl font-semibold mb-1">Plain hoppers</h3>
+                        <p class="text-sm mb-4">Sri Lankan authentic style Fried rice. Enjoy the taste!</p>
+                        <button class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition">Order
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-down" data-scroll-to="story">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section id="story" class="bg-dark px-6 section">
+            <div class="container mx-auto">
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div></div>
+                    <div class="md:col-span-6 space-y-4">
+                        <div class="story-card rounded-lg overflow-hidden h-40 md:h-full md:w-full reveal-item">
+                            <img src="/asset/cfcimage1.png" alt="Restaurant Interior"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+
+                    <div class="md:col-span-4">
+                        <p class="text-sm text-secondary mb-2 section-title">Our Story</p>
+                        <h2 class="text-4xl font-bold text-primary mb-4">Savor the taste of tradition in every bite!
+                        </h2>
+                        <p class="text-gray-700 mb-6 reveal-text text-sm">
+                            Ceylon Food Corner was born out of a deep passion for Sri Lankan cuisine and culture. Our
+                            chefs
+                            blend time-honored recipes with fresh, locally sourced ingredients to create dishes that are
+                            bold, flavorful, and unforgettable. Whether you're seeking the comforting spices of a
+                            traditional curry or the delicate sweetness of a coconut sambol, every plate is a journey to
+                            our
+                            island home.
+                        </p>
+                        <button class="btn-primary px-6 py-2 rounded-md animate-pulse">Sign In</button>
+                    </div>
+                    <div></div>
+
+                </div>
+            </div>
+            <div class="scroll-down" data-scroll-to="services">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- A Taste of Sri Lanka Section -->
+        <section id="services" class="bg-dark px-6 section">
+            <div class="flex container mx-auto items-center justify-center flex-col text-center">
+                <div class="mb-8 ">
+                    <h2 class="text-sm text-gray-500 mb-2 section-title ">Services</h2>
+                    <h3 class="text-2xl font-bold text-primary mb-4">A Taste of Sri Lanka</h3>
+                    <p class="text-gray-600 max-w-3xl reveal-text">
+                        Ceylon Food Corner was born out of a deep passion for Sri Lankan cuisine and culture. Our chefs
+                        blend time-honored recipes with fresh, locally sourced ingredients to create dishes that are
+                        bold,
+                        flavorful, and unforgettable. Whether you're seeking the comforting spices of a traditional
+                        curry or
+                        the delicate sweetness of a coconut sambol, every plate is a journey to our island home.
+                    </p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <div class="flex space-x-6 pb-6 justify-center md:justify-start">
+                        <div class="chicken-roll flex flex-col items-center min-w-[120px] reveal-item">
+                            <div
+                                class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center mb-2">
+                                <img src="/api/placeholder/80/80" alt="Chicken Roll" class="w-16 h-16">
+                            </div>
+                            <p class="text-primary font-medium">Chicken Rolls</p>
+                        </div>
+
+                        <div class="chicken-roll flex flex-col items-center min-w-[120px] reveal-item">
+                            <div
+                                class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center mb-2">
+                                <img src="/api/placeholder/80/80" alt="Chicken Roll" class="w-16 h-16">
+                            </div>
+                            <p class="text-primary font-medium">Chicken Rolls</p>
+                        </div>
+
+                        <div class="chicken-roll flex flex-col items-center min-w-[120px] reveal-item">
+                            <div
+                                class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center mb-2">
+                                <img src="/api/placeholder/80/80" alt="Chicken Roll" class="w-16 h-16">
+                            </div>
+                            <p class="text-primary font-medium">Chicken Rolls</p>
+                        </div>
+
+                        <div class="chicken-roll flex flex-col items-center min-w-[120px] reveal-item">
+                            <div
+                                class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center mb-2">
+                                <img src="/api/placeholder/80/80" alt="Chicken Roll" class="w-16 h-16">
+                            </div>
+                            <p class="text-primary font-medium">Chicken Rolls</p>
+                        </div>
+
+                        <div class="chicken-roll flex flex-col items-center min-w-[120px] reveal-item">
+                            <div
+                                class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center mb-2">
+                                <img src="/api/placeholder/80/80" alt="Chicken Roll" class="w-16 h-16">
+                            </div>
+                            <p class="text-primary font-medium">Chicken Rolls</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-down" data-scroll-to="contact">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="px-6 text-center relative section bg-dark">
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="/api/placeholder/1600/500" alt="Sri Lankan food background"
+                    class="w-full h-full object-cover">
+            </div>
+
+            <div class="container mx-auto relative z-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary mb-8 section-title">We'd Love to Hear From You!
+                </h2>
+                <p class="mb-6 reveal-text">
+                    Visit us at <span class="font-medium">[Address]</span> or call <span class="font-medium">[Phone
+                        Number]</span> for more details.<br>
+                    For events, catering, or special requests, reach out to <span class="font-medium">[Email
+                        Address]</span>
+                </p>
+                <p class="mb-8 reveal-text">Experience the warmth of Ceylon Food Corner!</p>
+
+                <div class="max-w-md mx-auto mb-12">
+                    <h3 class="text-secondary text-xl mb-6 reveal-text">we're ready to welcome you!</h3>
+                    <button
+                        class="w-full py-3 rounded-lg bg-secondary text-white font-medium hover:bg-primary transition animate-pulse">Contact
+                        Us Now</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 px-6 md:px-12 lg:px-16">
+        <div class="container mx-auto grid md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Ceylon Food Corner</h3>
+                <p class="text-sm">Authentic Sri Lankan cuisine that brings the flavors of Ceylon to your table.</p>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent transition">Home</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Menu</a></li>
+                    <li><a href="#" class="hover:text-accent transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-accent transition">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4 mb-4">
+                    <a href="#" class="hover:text-accent transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="hover:text-accent transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-sm">© 2025 Ceylon Food Corner. All righ ts reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.opacity-0');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Mobile menu toggle
+            const menuButton = document.querySelector('button.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.classList.add('mobile-menu', 'fixed', 'inset-0', 'bg-white', 'z-20', 'flex', 'flex-col', 'p-6', 'transform', 'translate-x-full', 'transition-transform', 'duration-300', 'ease-in-out');
+            mobileMenu.innerHTML = `
+                <div class="flex justify-between items-center mb-8">
+                    <div class="font-bold text-xl text-primary">Ceylon Food Corner</div>
+                    <button class="text-primary close-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col space-y-4 mb-8">
+                    <a href="#" class="text-primary hover:text-secondary transition text-lg">Home</a>
+                    <a href="#" class="text-primary hover:text-secondary transition text-lg">Foods</a>
+                    <a href="#" class="text-primary hover:text-secondary transition text-lg">Contact</a>
+                    <a href="#" class="text-primary hover:text-secondary transition text-lg">About us</a>
+                </nav>
+                <div class="flex flex-col space-y-4 mt-auto">
+                    <button class="w-full py-3 rounded-md border-2 border-secondary text-secondary hover:bg-secondary hover:text-white transition">Sign In</button>
+                    <button class="w-full py-3 rounded-md bg-secondary text-white hover:bg-primary transition">Sign Up</button>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            menuButton.addEventListener('click', function () {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+
+            mobileMenu.querySelector('.close-menu').addEventListener('click', function () {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+    </script>
+</body>
+
+</html>
