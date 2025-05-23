@@ -101,15 +101,35 @@
         box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
       }
 
+      .btn-primary-two:hover {
+        background-color: #211951;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
+      }
+
       .btn-outline {
         border: 2px solid #211951;
         color: #211951;
         transition: all 0.3s ease;
       }
 
+      .btn-outline-two {
+         border: 2px solid #836fff;
+        color: #836fff;
+        transition: all 0.3s ease;
+      }
+
       .btn-outline:hover {
         border: 2px solid #836fff;
         background-color: #836fff;
+        color: #f0f3ff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
+      }
+
+      .btn-outline-two:hover {
+        border: 2px solid #211951;
+        background-color: #211951;
         color: #f0f3ff;
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
@@ -514,8 +534,8 @@
       >
         <div class="container mx-auto grid md:grid-cols-2 gap-6 items-center">
           <div class="animate-fadeInLeft text-primary">
-            <h1 class="text-4xl md:text-6xl font-semibold mb-2 sm:mb-6">
-              "A <span class="text-secondary">Journey </span>to the<br />
+            <h1 class="text-4xl md:text-6xl font-regular mb-2 sm:mb-6">
+              "A <span class="text-secondary font-semibold">Journey </span>to the<br />
               <span class="">Heart of Sri Lanka</span>"
             </h1>
             <p class="mb-2 sm:mb-6 text-sm md:text-lg font-medium">
@@ -531,7 +551,7 @@
                 Sign In
               </button>
               <button
-                class="btn-outline px-4 py-1 rounded-md border-2 font-semibold"
+                class="btn-outline-two px-4 py-1 rounded-md border-2 font-semibold"
               >
                 Sign Up
               </button>
@@ -658,18 +678,15 @@
       <!-- Our Story Section -->
       <section id="story" class="py-12 px-40 section">
         <div class="container mx-auto">
-          <div class="grid md:grid-cols-10 gap-8">
+          <div class="grid md:grid-cols-10 gap-0">
             
             <div class="md:col-span-6 space-y-4">
-              <div
-                class="story-card rounded-lg overflow-hidden h-40 md:h-full md:w-full reveal-item"
-              >
                 <img
                   src="/asset/cfcimage1.png"
                   alt="Restaurant Interior"
-                  class="w-3/4 h-full object-cover"
+                  class="w-3/4  object-cover rounded-lg overflow-hidden reveal-item story-card rounded-lg overflow-hidden"
                 />
-              </div>
+              
             </div>
 
             <div class="md:col-span-4 justify-center flex flex-col items-start">
@@ -853,7 +870,7 @@
           </p>
 
           <div class="reveal-text max-w-md mx-auto mb-12 animate-pulse bg-secondary transition bg-rounded-lg bg-secondary text-white p-8 rounded-lg">
-            <h3 class="text-white text-xl mb-6 font-semibold">
+            <h3 class="text-white text-2xl mb-6 font-semibold">
               we're ready to welcome you!
             </h3>
             <button
