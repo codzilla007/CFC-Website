@@ -16,7 +16,7 @@
 
       body {
         font-family: "Poppins", sans-serif;
-        
+
         /* background-image: url("/asset//cfc\ pattern.png"); */
         overflow-x: hidden;
 
@@ -24,8 +24,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        
-         
       }
 
       section {
@@ -91,8 +89,14 @@
         transition: all 0.3s ease;
       }
 
+      .btn-primary-two {
+        background-color: #836fff;
+        color: #f0f3ff;
+        transition: all 0.3s ease;
+      }
+
       .btn-primary:hover {
-        background-color: #4736a3;
+        background-color: #836fff;
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
       }
@@ -104,7 +108,8 @@
       }
 
       .btn-outline:hover {
-        background-color: #211951;
+        border: 2px solid #836fff;
+        background-color: #836fff;
         color: #f0f3ff;
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(74, 49, 170, 0.2);
@@ -394,16 +399,16 @@
         </nav>
         <div class="flex space-x-4 text-sm">
           <button
-            class="hidden md:block px-2 py-1 rounded-md border-2 border-primary text-primary font-semibold transition border-2"
+            class="hidden btn-outline md:block px-2 py-1 rounded-md border-2 border-primary text-primary font-semibold transition border-2"
           >
             Sign In
           </button>
           <button
-            class="hidden md:block px-2 py-1 rounded-md bg-primary font-semibold text-white transition"
+            class="hidden btn-primary md:block px-2 py-1 rounded-md bg-primary font-semibold text-white transition"
           >
             Sign Up
           </button>
-          <button class="md:hidden text-primary menu-toggle">
+          <button class=" md:hidden text-primary menu-toggle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -503,11 +508,14 @@
     <!-- Main content wrapper for smooth scrolling -->
     <div class="smooth-scroll-container overflow-hidden">
       <!-- Hero Section -->
-      <section id="home" class="hero-section py-12 px-40 section bg-[url(/asset/hero-image.png)] bg-no-repeat bg-cover bg-center">
-        <div class="container mx-auto grid md:grid-cols-2 gap-6 items-center ">
-          <div class="animate-fadeInLeft text-offwhite">
+      <section
+        id="home"
+        class="hero-section py-12 px-40 section bg-[url(/asset/hero-image.png)] bg-no-repeat bg-cover bg-center"
+      >
+        <div class="container mx-auto grid md:grid-cols-2 gap-6 items-center">
+          <div class="animate-fadeInLeft text-primary">
             <h1 class="text-4xl md:text-6xl font-semibold mb-2 sm:mb-6">
-              "A <span class="">Journey </span>to the<br />
+              "A <span class="text-secondary">Journey </span>to the<br />
               <span class="">Heart of Sri Lanka</span>"
             </h1>
             <p class="mb-2 sm:mb-6 text-sm md:text-lg font-medium">
@@ -515,13 +523,11 @@
               Indulge in rich spices, authentic recipes, and the warm
               hospitality of our island home.
             </p>
-            <p
-              class="text-md md:text-2xl font-semibold mb-4 sm:mb-8"
-            >
+            <p class="text-md md:text-2xl font-semibold mb-4 sm:mb-8">
               Savor the taste of tradition in every bite!
             </p>
             <div class="flex space-x-4 text-md md:text-lg">
-              <button class="btn-primary px-5 py-1 rounded-md border-primary">
+              <button class="btn-primary-two px-5 py-1 rounded-md border-primary bg-secondary">
                 Sign In
               </button>
               <button
@@ -538,7 +544,7 @@
               class="rounded-lg animate-fadeInRight"
             />
           </div>
-          <div class=" animate-float">
+          <div class="animate-float">
             <!-- <img
               src="/asset/cfcimage5.png"
               alt="Sri Lankan Food Corner Illustration"
@@ -555,8 +561,8 @@
 
       <!-- Favorite Items Section -->
       <section id="foods" class="py-12 px-40 section">
-        <div class="container mx-auto">
-          <div class="flex justify-between items-center mb-6">
+        <div class="container mx-auto flex flex-col h-96">
+          <div class="flex flex-auto justify-between items-center mb-6">
             <div class="text-3xl font-bold text-primary">
               Our most favorite Items
             </div>
@@ -567,17 +573,19 @@
             >
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 h-full"
+          >
             <!-- Food Item 1 -->
             <div
-              class="food-card rounded-xl p-4 text-white reveal-item md:col-span-7"
+              class="food-card rounded-xl p-8 text-white reveal-item md:col-span-7 bg-[url(/asset/foods/10.png)] bg-bottom bg-cover"
             >
               <h3 class="text-xl font-semibold mb-1">String Hoppers</h3>
               <p class="text-sm mb-4">
                 Sri Lankan authentic style Fried rice. Enjoy the taste!
               </p>
               <button
-                class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition"
+                class="bg-secondary text-white px-4 py-1 rounded-md hover:bg-light transition"
               >
                 Order Now
               </button>
@@ -585,14 +593,14 @@
 
             <!-- Food Item 2 -->
             <div
-              class="food-card rounded-xl p-4 text-white reveal-item md:col-span-5"
+              class="food-card rounded-xl p-8 text-white reveal-item md:col-span-5 bg-[url(/asset/foods/7.png)] bg-center bg-cover"
             >
-              <h3 class="text-xl font-semibold mb-1">Fried Rice</h3>
+              <h3 class="text-xl font-semibold mb-1">Rice and Curry</h3>
               <p class="text-sm mb-4">
-                Sri Lankan authentic style Fried rice. Enjoy the taste!
+                Sri Lankan authentic style Rice and curry. Enjoy the taste!
               </p>
               <button
-                class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition"
+                class="bg-secondary text-white px-4 py-1 rounded-md hover:bg-light transition"
               >
                 Order Now
               </button>
@@ -600,14 +608,14 @@
 
             <!-- Food Item 3 -->
             <div
-              class="food-card rounded-xl p-4 text-white reveal-item md:col-span-5"
+              class="food-card rounded-xl p-8 text-white reveal-item md:col-span-5 bg-[url(/asset/foods/9.png)] bg-center bg-cover"
             >
               <h3 class="text-xl font-semibold mb-1">Veg Rotti</h3>
               <p class="text-sm mb-4">
                 Sri Lankan authentic style Fried rice. Enjoy the taste!
               </p>
               <button
-                class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition"
+                class="bg-secondary text-white px-4 py-1 rounded-md hover:bg-light transition"
               >
                 Order Now
               </button>
@@ -615,20 +623,21 @@
 
             <!-- Food Item 4 -->
             <div
-              class="food-card rounded-xl p-4 text-white reveal-item md:col-span-7"
+              class="food-card rounded-xl p-8 text-white reveal-item md:col-span-7 bg-[url(/asset/foods/8.png)] bg-cover bg-center bg-no-repeat"
             >
               <h3 class="text-xl font-semibold mb-1">Plain hoppers</h3>
               <p class="text-sm mb-4">
                 Sri Lankan authentic style Fried rice. Enjoy the taste!
               </p>
               <button
-                class="bg-white text-secondary px-4 py-1 rounded-md hover:bg-light transition"
+                class="bg-secondary text-white px-4 py-1 rounded-md hover:bg-light transition"
               >
                 Order Now
               </button>
             </div>
           </div>
         </div>
+
         <div class="scroll-down" data-scroll-to="story">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -649,8 +658,8 @@
       <!-- Our Story Section -->
       <section id="story" class="py-12 px-40 section">
         <div class="container mx-auto">
-          <div class="grid md:grid-cols-12 gap-8">
-            <div></div>
+          <div class="grid md:grid-cols-10 gap-8">
+            
             <div class="md:col-span-6 space-y-4">
               <div
                 class="story-card rounded-lg overflow-hidden h-40 md:h-full md:w-full reveal-item"
@@ -658,12 +667,12 @@
                 <img
                   src="/asset/cfcimage1.png"
                   alt="Restaurant Interior"
-                  class="w-full h-full object-cover"
+                  class="w-3/4 h-full object-cover"
                 />
               </div>
             </div>
 
-            <div class="md:col-span-4">
+            <div class="md:col-span-4 justify-center flex flex-col items-start">
               <p class="text-sm text-secondary mb-2 section-title">Our Story</p>
               <h2 class="text-4xl font-bold text-primary mb-4">
                 Savor the taste of tradition in every bite!
@@ -681,7 +690,7 @@
                 Sign In
               </button>
             </div>
-            <div></div>
+            
           </div>
         </div>
         <div class="scroll-down" data-scroll-to="services">
@@ -702,7 +711,7 @@
       </section>
 
       <!-- A Taste of Sri Lanka Section -->
-      <section id="services" class="py-12 px-40 section">
+      <!-- <section id="services" class="py-12 px-40 section">
         <div
           class="flex container mx-auto items-center justify-center flex-col text-center"
         >
@@ -815,16 +824,16 @@
             />
           </svg>
         </div>
-      </section>
+      </section> -->
 
       <!-- Contact Section -->
       <section id="contact" class="py-12 px-40 text-center relative section">
         <div class="absolute inset-0 z-0 opacity-20">
-          <img
+          <!-- <img
             src="/api/placeholder/1600/500"
             alt="Sri Lankan food background"
             class="w-full h-full object-cover"
-          />
+          /> -->
         </div>
 
         <div class="container mx-auto relative z-10">
@@ -834,21 +843,21 @@
             We'd Love to Hear From You!
           </h2>
           <p class="mb-6 reveal-text">
-            Visit us at <span class="font-medium">[Address]</span> or call
-            <span class="font-medium">[Phone Number]</span> for more details.<br />
+            Visit us at <span class="font-semibold">B05 house , Borey leshan lord garden, lek muoy,sangkat 1, preah sihanouk, cambodia <br> </span> or call
+            <span class="font-semibold">+85595386475</span> for more details.<br />
             For events, catering, or special requests, reach out to
-            <span class="font-medium">[Email Address]</span>
+            <span class="font-semibold">vibenimo@gamil.com </span>
           </p>
           <p class="mb-8 reveal-text">
             Experience the warmth of Ceylon Food Corner!
           </p>
 
-          <div class="max-w-md mx-auto mb-12">
-            <h3 class="text-secondary text-xl mb-6 reveal-text">
+          <div class="reveal-text max-w-md mx-auto mb-12 animate-pulse bg-secondary transition bg-rounded-lg bg-secondary text-white p-8 rounded-lg">
+            <h3 class="text-white text-xl mb-6 font-semibold">
               we're ready to welcome you!
             </h3>
             <button
-              class="w-full py-3 rounded-lg bg-secondary text-white font-medium hover:bg-primary transition animate-pulse"
+              class="w-full rounded-lg  font-medium  "
             >
               Contact Us Now
             </button>
